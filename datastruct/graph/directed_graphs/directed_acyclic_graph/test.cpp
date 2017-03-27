@@ -6,7 +6,8 @@
  ************************************************************************/
 
 #include<iostream>
-#include "dag.h"
+#include "directed_graph.h"
+#include "single_pair_shortest_path.h"
 
 using namespace std;
 
@@ -58,45 +59,45 @@ int main() {
     Edge e23(v0, v11, 0);
     Edge e24(v0, v12, 0);
     Edge e25(v0, v15, 0);
-    DAGraph dga;
-    dga.addEdge(e0);
-    dga.addEdge(e1);
-    dga.addEdge(e2);
-    dga.addEdge(e3);
-    dga.addEdge(e4);
-    dga.addEdge(e5);
-    dga.addEdge(e6);
-    dga.addEdge(e7);
-    dga.addEdge(e8);
-    dga.addEdge(e9);
-    dga.addEdge(e10);
-    dga.addEdge(e11);
-    dga.addEdge(e12);
-    dga.addEdge(e13);
-    dga.addEdge(e14);
-    dga.addEdge(e15);
-    dga.addEdge(e16);
-    dga.addEdge(e17);
-    dga.addEdge(e18);
-    dga.addEdge(e19);
-    dga.addEdge(e20);
-    dga.addEdge(e21);
-    dga.addEdge(e22);
-    dga.addEdge(e23);
-    dga.addEdge(e24);
-    dga.addEdge(e25);
-    dga.print();
+    DGraph dg;
+    dg.addEdge(e0);
+    dg.addEdge(e1);
+    dg.addEdge(e2);
+    dg.addEdge(e3);
+    dg.addEdge(e4);
+    dg.addEdge(e5);
+    dg.addEdge(e6);
+    dg.addEdge(e7);
+    dg.addEdge(e8);
+    dg.addEdge(e9);
+    dg.addEdge(e10);
+    dg.addEdge(e11);
+    dg.addEdge(e12);
+    dg.addEdge(e13);
+    dg.addEdge(e14);
+    dg.addEdge(e15);
+    dg.addEdge(e16);
+    dg.addEdge(e17);
+    dg.addEdge(e18);
+    dg.addEdge(e19);
+    dg.addEdge(e20);
+    dg.addEdge(e21);
+    dg.addEdge(e22);
+    dg.addEdge(e23);
+    dg.addEdge(e24);
+    dg.addEdge(e25);
+    dg.print();
 
-    printf("indegree of v1 is %d\n", dga.getIndegree(v1));
-    printf("outdegree of v5 is %d\n", dga.getOutdegree(v5));
-    printf("weight of v4 to v7 is %d\n", dga.getWeight(v4, v7));
-    vector<Vertex> sorted = dga.sort();
+    printf("indegree of v1 is %d\n", dg.getIndegree(v1));
+    printf("outdegree of v5 is %d\n", dg.getOutdegree(v5));
+    printf("weight of v4 to v7 is %d\n", dg.getWeight(v4, v7));
+    vector<Vertex> sorted = sort(dg);
     for (vector<Vertex>::iterator it = sorted.begin(); it != sorted.end(); ++it) {
         printf("%s \n", it->getName().c_str());
     }
     printf("\n");
 
-    vector<Vertex> shortestPath = dga.getShortestPath(v0);
+    vector<Vertex> shortestPath = getShortestPath(dg, v0);
     for (vector<Vertex>::iterator it = shortestPath.begin(); it != shortestPath.end(); ++it) {
         printf("%s \n", it->getName().c_str());
     }

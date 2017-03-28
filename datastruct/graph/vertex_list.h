@@ -4,11 +4,12 @@
 #include "vertex.h"
 #include "edge.h"
 
+template <class T>
 class VertexNode {
 public:
-    Vertex v;
-    VertexNode* next;
-    explicit VertexNode(Vertex v) {
+    Vertex<T> v;
+    VertexNode<T>* next;
+    explicit VertexNode(Vertex<T> v) {
         this->v = v;
         next = 0;
     }
@@ -19,8 +20,8 @@ public:
         }
     }
 
-    VertexNode* clone() {
-        VertexNode* clone = new VertexNode(v);
+    VertexNode<T>* clone() {
+        VertexNode<T>* clone = new VertexNode<T>(v);
         clone->next = 0;
         if (next != 0) {
             clone->next = next->clone();
@@ -30,17 +31,18 @@ public:
     }
 };
 
+template <class T>
 class VertexList {
 public:
     VertexList() {
         head = 0;
     }
 
-    explicit VertexList(Vertex v) {
-        head = new VertexNode(v);
+    explicit VertexList(Vertex<T> v) {
+        head = new VertexNode<T>(v);
     }
 
-    VertexList(const VertexList& vl) {
+    VertexList(const VertexList<T>& vl) {
         head = 0;
         if (vl.head != 0) {
             head = vl.head->clone();
@@ -54,27 +56,27 @@ public:
         }
     }
 
-    VertexNode* getHead() {
+    VertexNode<T>* getHead() {
         return head;
     }
 
-    void add(Vertex v) {
+    void add(Vertex<T> v) {
         if (head == 0) {
-            head = new VertexNode(v);
+            head = new VertexNode<T>(v);
             return;
         }
 
-        VertexNode* last = head;
+        VertexNode<T>* last = head;
         while (last->next != 0) {
             last = last->next;
         }
 
-        last->next = new VertexNode(v);
+        last->next = new VertexNode<T>(v);
     }
 
     int count() {
         int count = 0;
-        VertexNode* node = head;
+        VertexNode<T>* node = head;
         while (node) {
             count ++;
             node = node->next;
@@ -83,8 +85,8 @@ public:
         return count;
     }
 
-    bool exist(Vertex v) {
-        VertexNode* node = head;
+    bool exist(Vertex<T> v) {
+        VertexNode<T>* node = head;
         while (node) {
             if (node->v.equal(v)) {
                 return true;
@@ -97,15 +99,15 @@ public:
     }
 
     void print() {
-        VertexNode* node = head;
+        VertexNode<T>* node = head;
         while (node) {
-            printf("%s ->", node->v.getName().c_str());
+            printf("%s ->", node->v.getData().c_str());
             node = node->next;
         }
     }
 
 private:
-    VertexNode* head;
+    VertexNode<T>* head;
 };
 
 #endif

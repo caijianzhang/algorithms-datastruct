@@ -7,33 +7,34 @@
 
 using namespace std;
 
+template <class T>
 class Vertex {
 public:
     Vertex() {
         id = 0;
-        name = string();
+        data = T();
     }
 
-    Vertex(int id, string name) {
+    Vertex(int id, T data) {
         this->id = id;
-        this->name = name;
+        this->data = data;
     }
 
-    Vertex(const Vertex& v) {
+    Vertex(const Vertex<T>& v) {
         this->id = v.id;
-        this->name = v.name;
+        this->data = v.data;
     }
 
     ~Vertex() {
 
     }
 
-    void setName(string name) {
-        this->name = name;
+    void setData(T data) {
+        this->data = data;
     }
 
-    string getName() const {
-        return name;
+    T getData() const {
+        return data;
     }
 
     void setId(int id) {
@@ -50,11 +51,12 @@ public:
 
 private:
     int id;
-    string name;
+    T data;
 };
 
 // std::map use operator '<' for sorting
-bool operator < (const Vertex u, const Vertex v) {
+template <class T>
+bool operator < (const Vertex<T> u, const Vertex<T> v) {
     return u.getId() < v.getId();
 }
 

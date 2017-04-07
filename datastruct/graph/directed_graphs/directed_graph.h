@@ -9,11 +9,12 @@ template <class T>
 class DGraph {
 public:
     typedef map< Vertex<T>, VertexList<T> > Map;
+	typedef typename Map::iterator Map_iterator;
     DGraph(){}
     ~DGraph(){}
     
     void addEdge(Edge<T> e) {
-        typename Map::iterator it = graph.find(e.u);
+        Map_iterator it = graph.find(e.u);
         if (it == graph.end()) {
             graph.insert(pair< Vertex<T>, VertexList<T> >(e.u, VertexList<T>()));
             it = graph.find(e.u);
@@ -32,7 +33,7 @@ public:
     
      vector< Vertex<T> > getVertexs() {
         vector< Vertex<T> > vertexs;
-        typename Map::iterator it = graph.begin();
+        Map_iterator it = graph.begin();
         for (; it != graph.end(); ++it) {
             vertexs.push_back(it->first);
         }
@@ -41,7 +42,7 @@ public:
     }
 
     void print() {
-        typename Map::iterator it = graph.begin();
+        Map_iterator it = graph.begin();
         for (; it != graph.end(); ++it) {
             printf("v->%s u->", it->first.getData().c_str());
             it->second.print();
@@ -51,7 +52,7 @@ public:
 
     int getIndegree(Vertex<T> v) {
         int degree = 0;
-        typename Map::iterator it = graph.begin();
+        Map_iterator it = graph.begin();
         for (; it != graph.end(); ++it) {
             if (it->second.exist(v)) {
                 degree ++;
@@ -62,7 +63,7 @@ public:
     }
 
     int getOutdegree(Vertex<T> v) {
-        typename Map::iterator it = graph.find(v);
+        Map_iterator it = graph.find(v);
         if (it == graph.end()) {
             return 0;
         }

@@ -1,0 +1,5 @@
+# ignore dSYM
+*.dSYM
+
+# ignore test file
+test

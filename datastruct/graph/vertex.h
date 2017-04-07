@@ -7,57 +7,48 @@
 
 using namespace std;
 
-template <class T>
+template <class Key, class Value>
 class Vertex {
 public:
-    Vertex() {
-        id = 0;
-        data = T();
-    }
-
-    Vertex(int id, T data) {
-        this->id = id;
-        this->data = data;
+    Vertex(Key key, Value value) {
+        this->key = key;
+        this->value = value;
     }
 
     Vertex(const Vertex<T>& v) {
-        this->id = v.id;
-        this->data = v.data;
+        this->key = v.key;
+        this->value = v.value;
     }
 
     ~Vertex() {
 
     }
 
-    void setData(T data) {
-        this->data = data;
+    void setValue(Value value) {
+        this->value = value;
     }
 
-    T getData() const {
-        return data;
+    Value getValue() const {
+        return value;
     }
 
-    void setId(int id) {
-        this->id = id;
-    }
-
-    int getId() const {
-        return id;
+    Key getKey() {
+        return key;
     }
 
     bool equal(Vertex v) const {
-        return this->id == v.id;
+        return this->key == v.key;
     }
 
 private:
-    int id;
-    T data;
+    Key key;
+    Value value;
 };
 
 // std::map use operator '<' for sorting
-template <class T>
-bool operator < (const Vertex<T> u, const Vertex<T> v) {
-    return u.getId() < v.getId();
+template <class Key, class Value>
+bool operator < (const Vertex<Key, Value> u, const Vertex<Key, Value> v) {
+    return u.getKey() < v.getKey();
 }
 
 #endif

@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../empty.h"
-#include "../adt.h"
+#include "../container.h"
 
 template <class T, int Size = 32>
-class Queue : public Adt<T> {
+class Queue : public Container<T> {
 	const static int ChunkSize = Size;
 
 public:

@@ -1,5 +1,5 @@
-#ifndef _ADT_H_
-#define _ADT_H_
+#ifndef _CONTAINER_H_
+#define _CONTAINER_H_
 
 #include <string>
 #include <stdio.h>
@@ -9,12 +9,12 @@
 using namespace std;
 
 template <class ValueType>
-class Adt {
+class Container {
 public:
-	Adt() {
+	Container() {
 	}
 
-	virtual ~Adt() {
+	virtual ~Container() {
 	}
 
 public:
@@ -64,4 +64,4 @@ protected:
 	int size;
 };
 
-#endif // _ADT_H_
+#endif // _CONTAINER_H_

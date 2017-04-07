@@ -3,26 +3,24 @@
 
 #include "vertex.h"
 
-template <class T>
+template <class Key, class Value>
 class Edge {
 public:
-    const static int INFINITI;
+    const static int INFINITI = 10000000;
 
 public:
     // source verte
-    Vertex<T> u;
+    Vertex<Key, Value> u;
     // target vertex
-    Vertex<T> v;
+    Vertex<Key, Value> v;
     // weight
     int w;
 
-    Edge(Vertex<T> u, Vertex<T> v, int w) {
+    Edge(Vertex<Key, Value> u, Vertex<Key, Value> v, int w) {
         this->u = u;
         this->v = v;
         this->w = w;
     }
 };
-
-template <class T> const int Edge<T>::INFINITI = 10000000;
 
 #endif 

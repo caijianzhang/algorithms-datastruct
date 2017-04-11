@@ -4,11 +4,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../empty.h"
+#include "../iterator.h"
 #include "../container.h"
 
 template <class T, int Size = 32>
-class Queue : public Container<T> {
+class Queue : public Container {
 	const static int ChunkSize = Size;
+
+public:
+	typedef Iterator<T*> Iterator;
 
 public:
 	Queue() {
@@ -39,12 +43,12 @@ public:
 		return string("Queue");
 	}
 
-	virtual Iterator<T> begin() {
-		return Iterator<T>(queue);	
+	virtual Iterator begin() {
+		return Iterator(queue);	
 	}
 
-	virtual Iterator<T> end() {
-		return Iterator<T>(queue + this->size);
+	virtual Iterator end() {
+		return Iterator(queue + this->size);
 	}
 
 	virtual void push_back(const T value) {

@@ -3,3 +3,9 @@
 
 # ignore test file
 test
+
+# ignore .swap files
+*.swp
+
+# ignore tag file tags
+tags

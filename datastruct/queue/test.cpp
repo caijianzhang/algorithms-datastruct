@@ -7,7 +7,7 @@ int main() {
 	queue.push_back(789);
 	queue.pop();
 	queue.pop();
-	Iterator<int> it = queue.begin();
+	Queue<int>::Iterator it = queue.begin();
 
 	for (; it != queue.end(); ++it) {
 		printf("%d\n", *it);

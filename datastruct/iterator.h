@@ -2,57 +2,84 @@
 #define _ITERATOR_H_
 
 template <class T>
+struct Iterator_Trais {
+	typedef T value_type;
+};
+
+template <class T>
+struct Iterator_Trais<T*> {
+	typedef T value_type;
+};
+
+template <class T>
+struct Iterator_Trais<const T> {
+	typedef T value_type;
+};
+
+template <class T>
+struct Iterator_Trais<const T*> {
+	typedef T value_type;
+};
+
+template <class T>
 class Iterator {
 public:
-	Iterator(T* ptr) {
-		this->ptr = ptr;
+	typedef typename Iterator_Trais<T>::value_type value_type;
+
+public:
+	Iterator(T iterator) {
+		this->iterator = iterator;
+	}
+
+protected:
+	Iterator() {
+
 	}
 
 public:
 	Iterator<T>& operator++() {
-		++ptr;
+		++iterator;
 		return *this;
 	}
 
 	Iterator<T> operator++(int) {
 		Iterator<T> self = *this;
-		++ptr;
+		++iterator;
 		return self;
 	}
 
 	Iterator<T>& operator--() {
-		--ptr;
+		--iterator;
 		return *this;
 	}
 
 	Iterator<T> operator--(int) {
 		Iterator<T> self = *this;
-		--ptr;
+		--iterator;
 		return self;
 	}
 	
-	const T operator*() {
-		return *ptr;
+	const value_type operator*() {
+		return *iterator;
 	}
 	
-	T& operator->() {
-		return *ptr;
+	value_type& operator->() {
+		return iterator;
 	}
 
-	void operator=(const T value) {
-		*ptr = value;
+	void operator=(const value_type value) {
+		*iterator = value;
 	}
 	
 	bool operator==(const Iterator<T>& it) {
-		return ptr == it.ptr;
+		return iterator == it.iterator;
 	}
 
 	bool operator!=(const Iterator<T>& it) {
-		return !(operator==(it));
+		return !operator==(it);
 	}
-
 private:
-	T* ptr;
+	T iterator;
 };
 
 #endif // _ITERATOR_H_

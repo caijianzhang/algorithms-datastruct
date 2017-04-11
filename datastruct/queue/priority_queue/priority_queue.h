@@ -17,8 +17,8 @@ public:
 public:
 	virtual T pop() {
 		// find the most priority one
-		Iterator<T> priority = this->begin();
-		Iterator<T> it = this->begin();
+		typename Queue<T>::Iterator priority = this->begin();
+		typename Queue<T>::Iterator it = this->begin();
 		for (; it != this->end(); ++it) {
 			if (*priority < *it) {
 				priority = it;

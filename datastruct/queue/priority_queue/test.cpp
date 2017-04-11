@@ -13,7 +13,7 @@ int main() {
 	queue.push_back(-1);
 	queue.push_back(25);
 	queue.push_back(90);
-	Iterator<int> it = queue.begin();
+	Queue<int>::Iterator it = queue.begin();
 
 	while (queue.getSize() > 0)
 		printf("priority value is : %d\n", queue.pop());

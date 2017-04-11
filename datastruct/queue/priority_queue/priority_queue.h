@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2017
+ * 
+ * Permission to use, copy, modify, distribute and sell this software
+ * for any purpose is hereby granted without fee.
+ *
+ * Ronnie Chang
+ *
+ */
+
 #ifndef _PRIORITY_QUEUE_H_
 #define _PRIORITY_QUEUE_H_
 

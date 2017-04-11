@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2017
+ * 
+ * Permission to use, copy, modify, distribute and sell this software
+ * for any purpose is hereby granted without fee.
+ *
+ * Ronnie Chang
+ *
+ */
+
 #ifndef _EMPTY_H_
 #define _EMPTY_H_
 
@@ -6,52 +16,58 @@ struct Empty {
 	T operator()() { return T(); }		
 };
 
-/* specialazition of pointer */
+/* specialization of pointer */
 template <class T> 
 struct Empty<T*> {
 	T* operator()() { return 0; }
 };
 
-/* specialazition of int */
+/* specialization of int */
 template <>
 struct Empty <int> {
 	int operator()() { return 0; }
 };
 
-/* specialazition of char */
+/* specialization of char */
 template <>
 struct Empty <char> {
 	char operator()() { return 0; }
 };
 
-/* specialazition of bool */
+/* specialization of bool */
 template <>
 struct Empty <bool> {
 	bool operator()() { return false; }
 };
 
-/* specialazition of short */
+/* specialization of short */
 template <>
 struct Empty <short> {
 	short operator()() { return 0; }
 };
 
-/* specialazition of long */
+/* specialization of long */
 template <>
 struct Empty <long> {
 	long operator()() { return 0; }
 };
 
-/* specialazition of float */
+/* specialization of float */
 template <>
 struct Empty <float> {
 	float operator()() { return 0.0f; }
 };
 
-/* specialazition of double */
+/* specialization of double */
 template <>
 struct Empty <double> {
 	double operator()() { return 0.0f; }
 };
+
+/* specialization of void */
+template <>
+struct Empty <void> {
+	void operator()() {  }
+}
 
 #endif // _EMPTY_H_

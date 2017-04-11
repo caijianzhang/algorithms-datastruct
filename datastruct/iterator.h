@@ -1,30 +1,52 @@
+/*
+ * Copyright (c) 2017
+ * 
+ * Permission to use, copy, modify, distribute and sell this software
+ * for any purpose is hereby granted without fee.
+ *
+ * Ronnie Chang
+ *
+ */
+
 #ifndef _ITERATOR_H_
 #define _ITERATOR_H_
 
+/*
+ * traits of Iterator
+ */
 template <class T>
-struct Iterator_Trais {
+struct Iterator_Traits {
 	typedef T value_type;
 };
 
+/*
+ * specialization for pointer
+ */
 template <class T>
-struct Iterator_Trais<T*> {
+struct Iterator_Traits<T*> {
 	typedef T value_type;
 };
 
+/*
+ * specialization for const
+ */
 template <class T>
-struct Iterator_Trais<const T> {
+struct Iterator_Traits<const T> {
 	typedef T value_type;
 };
 
+/*
+ * specialization for const pointer
+ */
 template <class T>
-struct Iterator_Trais<const T*> {
+struct Iterator_Traits<const T*> {
 	typedef T value_type;
 };
 
 template <class T>
 class Iterator {
 public:
-	typedef typename Iterator_Trais<T>::value_type value_type;
+	typedef typename Iterator_Traits<T>::value_type value_type;
 
 public:
 	Iterator(T iterator) {

@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2017
+ * 
+ * Permission to use, copy, modify, distribute and sell this software
+ * for any purpose is hereby granted without fee.
+ *
+ * Ronnie Chang
+ *
+ */
+
 #ifndef _LIST_ADJACENCY_LIST_H_
 #define _LIST_ADJACENCY_LIST_H_
 

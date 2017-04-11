@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2017
+ * 
+ * Permission to use, copy, modify, distribute and sell this software
+ * for any purpose is hereby granted without fee.
+ *
+ * Ronnie Chang
+ *
+ */
+
 #ifndef _CONTAINER_H_
 #define _CONTAINER_H_
 
@@ -19,6 +29,9 @@ public:
 public:
 	virtual const string getClassName() = 0;
 	
+	/*
+	 * get the size of the objects
+	 */
 	virtual int getSize() {
 		return size;
 	}

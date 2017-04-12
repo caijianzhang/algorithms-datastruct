@@ -20,12 +20,17 @@ using namespace std;
 template <class Key, class Value>
 class Vertex {
 public:
+	Vertex() {
+		this->key = Empty<Key>()();
+		this->value = Empty<Value>()();
+	}
+
     Vertex(Key key, Value value) {
         this->key = key;
         this->value = value;
     }
 
-    Vertex(const Vertex<T>& v) {
+    Vertex(const Vertex<Key, Value>& v) {
         this->key = v.key;
         this->value = v.value;
     }
@@ -42,11 +47,15 @@ public:
         return value;
     }
 
-    Key getKey() {
+    Key getKey() const {
         return key;
     }
 
-    bool equal(Vertex v) const {
+	bool operator<(const Vertex<Key, Value> v) const {
+		return this->key < v.key;
+	}
+
+    bool operator==(const Vertex& v) const {
         return this->key == v.key;
     }
 
@@ -54,11 +63,5 @@ private:
     Key key;
     Value value;
 };
-
-// std::map use operator '<' for sorting
-template <class Key, class Value>
-bool operator < (const Vertex<Key, Value> u, const Vertex<Key, Value> v) {
-    return u.getKey() < v.getKey();
-}
 
 #endif

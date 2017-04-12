@@ -26,11 +26,21 @@ public:
     // weight
     int w;
 
-    Edge(Vertex<Key, Value> u, Vertex<Key, Value> v, int w) {
+    Edge(const Vertex<Key, Value>& u, const Vertex<Key, Value>& v, int w) {
         this->u = u;
         this->v = v;
         this->w = w;
     }
+
+	bool operator==(const Edge<Key, Value>& edge) const {
+		return this->u == edge.u &&
+			   this->v == edge.v &&
+			   this->w == edge.w;
+	}
+
+	bool operator<(const Edge<Key, Value>& edge) const {
+			return false;
+	}
 };
 
 #endif 

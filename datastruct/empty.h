@@ -68,6 +68,6 @@ struct Empty <double> {
 template <>
 struct Empty <void> {
 	void operator()() {  }
-}
+};
 
 #endif // _EMPTY_H_

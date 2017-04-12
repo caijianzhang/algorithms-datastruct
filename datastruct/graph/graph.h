@@ -13,17 +13,38 @@
 
 #include "../container.h"
 #include "../iterator.h"
+#include "../list/adjacency_list.h"
+#include "vertex.h"
+#include "edge.h"
 
-template <class T>
+template <class Key, class Value>
 class Graph {
+public:
+	typedef Vertex<Key, Value> _vertex;
+	typedef Edge<Key, Value> _edge;
+	typedef typename AdjacencyList<_vertex, _edge>::Iterator Iterator;
+
 public:
 	Graph() {}
 	~Graph() {}
 
 public:
-	void addEdge() {
-
+	void addEdge(_edge edge) {
+		if (!table.exist(edge.u, edge)) {
+			table.put(edge.u, edge);
+        }
 	}
+
+	Iterator begin() {
+		return table.begin();
+	}
+
+	Iterator end() {
+		return table.end();
+	}
+
+protected:
+	AdjacencyList<_vertex, _edge> table;
 };
 
 #endif // _GRAPH_GRAPH_H_

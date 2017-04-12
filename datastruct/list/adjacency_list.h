@@ -53,6 +53,20 @@ public:
 		table.insert(pair< Key, list<Value> >(key, l));
 	}
 
+	bool exist(Key key, Value value) {
+		inner_iterator it = table.find(key);
+		if (it != table.end()) {
+			typename value_type::iterator _it = it->second.begin();
+			for (; _it != it->second.end(); ++_it) {
+				if (*_it == value) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	int getSize() {
 		return table.size();
 	}

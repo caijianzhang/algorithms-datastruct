@@ -53,6 +53,10 @@ public:
 		table.insert(pair< Key, list<Value> >(key, l));
 	}
 
+	const Iterator find(Key key) {
+		return Iterator(table.find(key));
+	}
+
 	bool exist(Key key, Value value) {
 		inner_iterator it = table.find(key);
 		if (it != table.end()) {
@@ -65,6 +69,23 @@ public:
 		}
 
 		return false;
+	}
+
+	/*
+	 * AdjacencyList cann't computer the indegree, because it didn't known the type of Value 
+	 */
+	virtual int getIndegree(Key key) {
+		notSupport("getIndegree(Key key)");
+		return 0;
+	}
+
+	virtual int getOutdegree(Key key) {
+		inner_iterator it = table.find(key);
+		if (it != table.end()) {
+			return (*it).second.size();
+		}
+
+		return 0;
 	}
 
 	int getSize() {

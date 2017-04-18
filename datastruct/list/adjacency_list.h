@@ -16,6 +16,17 @@
 #include <map>
 #include <list>
 
+/*
+ * --------------------------------------------------------
+ * | key1 | value1 -> value2 -> value3 ......             |
+ * --------——----------------------------------------------
+ * | key2 | value1 -> value2 -> value3 ......             |
+ * --------------------------------------------------------
+ * | key3 | value1 -> value2 -> value3 ......             |
+ * --------------------------------------------------------
+ *
+ */
+
 using namespace std;
 
 template <class Key, class Value>
@@ -53,10 +64,13 @@ public:
 		table.insert(pair< Key, list<Value> >(key, l));
 	}
 
-	const Iterator find(Key key) {
+	Iterator find(Key key) {
 		return Iterator(table.find(key));
 	}
 
+	/*
+	 * if the value with key exist
+	 */
 	bool exist(Key key, Value value) {
 		inner_iterator it = table.find(key);
 		if (it != table.end()) {
@@ -72,22 +86,34 @@ public:
 	}
 
 	/*
-	 * AdjacencyList cann't computer the indegree, because it didn't known the type of Value 
+	 * calculate the count of the value appears
 	 */
-	virtual int getIndegree(Key key) {
-		notSupport("getIndegree(Key key)");
-		return 0;
-	}
-
-	virtual int getOutdegree(Key key) {
-		inner_iterator it = table.find(key);
-		if (it != table.end()) {
-			return (*it).second.size();
+	int count(Value value) {
+		int count = 0;
+		inner_iterator it = table.begin();
+		for (; it != table.end(); ++it) {
+			typename value_type::iterator _it = it->second.begin();
+			for (; _it != it->second.end(); ++_it) {
+				if (*_it == value) {
+					count ++;	
+				}
+			}
 		}
 
-		return 0;
+		return count;
 	}
 
+	/*
+	 * operator []
+	 * you can get value by @adjacencylist[@key]
+	 */
+	value_type operator[](Key key) {
+		return table[key];
+	}
+
+	/*
+	 * get the size 
+	 */ 
 	int getSize() {
 		return table.size();
 	}

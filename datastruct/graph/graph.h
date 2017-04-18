@@ -25,7 +25,8 @@ public:
 	typedef Vertex<Key, Value> type_vertex;
 	typedef Edge<Key, Value> type_edge;
 	typedef pair<type_vertex, type_edge> type_node;
-	typedef typename AdjacencyList<type_vertex, type_edge>::Iterator Iterator;
+	typedef typename AdjacencyList<type_vertex, type_node>::Iterator Iterator;
+	typedef typename AdjacencyList<type_vertex, type_node>::value_type value_type;
 
 public:
 	Graph() {}
@@ -40,11 +41,28 @@ public:
 	}
 
 	int getIndegree(type_vertex v) {
-		return table.getIndegree(v);
+		int indegree = 0;
+		Iterator it = table.begin();
+		for (; it != table.end(); ++it) {
+			value_type values = table[it->first];
+			typename value_type::iterator _it = values.begin();
+			for (; _it != values.end(); ++_it) {
+				if (_it->first == v) {
+					indegree ++;
+				}
+			}
+		}
+
+		return indegree;
 	}
 
 	int getOutdegree(type_vertex v) {
-		return table.getOutdegree(v);
+		Iterator it = table.find(v);
+		if (it != table.end()) {
+			return it->second.size();
+		}
+
+		return 0;
 	}
 
 protected:

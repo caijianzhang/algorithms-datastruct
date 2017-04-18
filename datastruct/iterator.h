@@ -82,7 +82,7 @@ public:
 	}
 	
 	const value_type operator*() {
-		return *iterator;
+		return iterator;
 	}
 	
 	value_type& operator->() {

@@ -81,7 +81,7 @@ protected:
 		typename Graph<Key, Value>::value_type value = graph[node.vertex];
 		typename Graph<Key, Value>::value_type::iterator it = value.begin();
 		if (it == value.end()) {
-			// if this vertex's outdegree is 0, we save the shortest value to ''shortest'
+			// if this vertex's outdegree is 0, we save the shortest value to 'shortest'
 			shortest.erase(node.vertex);
 			shortest.insert(pair<type_vertex, int>(node.vertex, node.shortest));
 			return;
@@ -90,15 +90,22 @@ protected:
 		for (; it != value.end(); ++it) {
 			type_vertex v = it->first;
 			type_edge e = it->second;
-			Node n = getVertexs(v);
-			if (node.shortest + e.w < n.shortest) {
-				n.shortest = node.shortest + e.w;
+			int n = getShortest(v);
+			if (node.shortest + e.w < n) {
+				n = node.shortest + e.w;
 				path.erase(v);
 				path.insert(pair<type_vertex, type_vertex>(v, node.vertex));
+				shortest.erase(v);
+				shortest.insert(pair<type_vertex, int>(v, n));
+			} else {
+				continue;
 			}
 
-			printf("key: %s's vertexs is %d\n", n.vertex.getKey().c_str(), n.shortest);
-			setVertexs(v, n);
+			printf("key: %s's vertexs is %d\n", v.getKey().c_str(), n);
+			Node x;
+			x.vertex = v;
+			x.shortest = n;
+			setVertexs(v, x);
 		}
 
 		return;
@@ -116,19 +123,13 @@ protected:
 		vertexs.push_back(n);
 	}
 
-	Node getVertexs(type_vertex v) {
-		typename PriorityQueue<Node>::Iterator it = vertexs.begin();
-		for (; it != vertexs.end(); ++it) {
-			if ((*it).vertex == v) {
-				return *it;
-			}
-		}
-		
-		Node node;
-		node.vertex = v;
-		node.shortest = BaseEdge::INFINITI;
-		vertexs.push_back(node);
-		return node;
+	int getShortest(type_vertex v) {
+		int result = BaseEdge::INFINITI;
+		typename map<type_vertex, int>::iterator it = shortest.find(v);
+		if (it != shortest.end())
+			result = it->second;
+
+		return result;
 	}
 
 protected:

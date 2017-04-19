@@ -20,6 +20,7 @@ int main() {
 	Edge<string, string> e6(v3, v5, 2);
 	Edge<string, string> e7(v4, v5, 1);
 	Edge<string, string> e8(v5, v6, 1);
+	Edge<string, string> e9(v6, v5, 1);
 	graph.addEdge(e0);
 	graph.addEdge(e1);
 	graph.addEdge(e2);
@@ -29,6 +30,7 @@ int main() {
 	graph.addEdge(e6);
 	graph.addEdge(e7);
 	graph.addEdge(e8);
+	graph.addEdge(e9);
 
 	printf("v0's outdegree is %d\n", graph.getOutdegree(v0));
 	printf("v1's indegree is %d\n", graph.getIndegree(v1));

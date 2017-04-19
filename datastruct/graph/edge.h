@@ -15,7 +15,7 @@
 
 class BaseEdge {
 public:
-    const static int INFINITI = 10000000;
+    const static int INFINITI = 0x7fffffff;
 };
 
 template <class Key, class Value>

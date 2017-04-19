@@ -13,11 +13,13 @@
 
 #include "vertex.h"
 
-template <class Key, class Value>
-class Edge {
+class BaseEdge {
 public:
     const static int INFINITI = 10000000;
+};
 
+template <class Key, class Value>
+class Edge : public BaseEdge {
 public:
     // source verte
     Vertex<Key, Value> u;
@@ -25,6 +27,7 @@ public:
     Vertex<Key, Value> v;
     // weight
     int w;
+	
 
     Edge(const Vertex<Key, Value>& u, const Vertex<Key, Value>& v, int w) {
         this->u = u;
@@ -39,7 +42,7 @@ public:
 	}
 
 	bool operator<(const Edge<Key, Value>& edge) const {
-			return false;
+			return this->w < edge.w;
 	}
 };
 

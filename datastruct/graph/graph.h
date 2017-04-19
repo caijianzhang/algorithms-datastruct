@@ -33,7 +33,7 @@ public:
 	~Graph() {}
 
 public:
-	void addEdge(type_edge edge) {
+	virtual void addEdge(type_edge edge) {
 		type_node node(edge.v, edge);
 		if (!table.exist(edge.u, node)) {
 			table.put(edge.u, node);
@@ -63,6 +63,14 @@ public:
 		}
 
 		return 0;
+	}
+
+	vector<type_vertex> keySet() {
+		return table.keySet();
+	}
+
+	value_type operator[](type_vertex v) {
+		return table[v];
 	}
 
 protected:

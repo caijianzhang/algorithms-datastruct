@@ -16,6 +16,9 @@
 template <class T>
 class PriorityQueue : public Queue<T> {
 public:
+	typedef typename Queue<T>::Iterator Iterator;
+
+public:
 	PriorityQueue() {
 
 	}

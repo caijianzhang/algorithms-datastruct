@@ -15,6 +15,7 @@
 #include "../iterator.h"
 #include <map>
 #include <list>
+#include <vector>
 
 /*
  * --------------------------------------------------------
@@ -33,7 +34,7 @@ template <class Key, class Value>
 class AdjacencyList : public Container {
 public:
 	typedef typename map< Key, list<Value> >::iterator inner_iterator;
-	typedef Iterator<inner_iterator> Iterator;
+	typedef Iterator<inner_iterator, true> Iterator;
 	typedef list<Value> value_type;
 	AdjacencyList() {}
 	~AdjacencyList() {}
@@ -101,6 +102,19 @@ public:
 		}
 
 		return count;
+	}
+
+	/*
+	 * get key set
+	 */
+	vector<Key> keySet() {
+		vector<Key> set;
+		inner_iterator it = table.begin();
+		for (; it != table.end(); ++it) {
+			set.push_back(it->first);
+		}
+
+		return set;
 	}
 
 	/*

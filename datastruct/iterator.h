@@ -14,24 +14,29 @@
 /*
  * traits of Iterator
  */
-template <class T>
+template <class T, bool stl>
 struct Iterator_Traits {
 	typedef T value_type;
+};
+
+template <class T>
+struct Iterator_Traits<T, true> {
+	typedef typename T::value_type value_type;
 };
 
 /*
  * specialization for pointer
  */
 template <class T>
-struct Iterator_Traits<T*> {
+struct Iterator_Traits<T*, false> {
 	typedef T value_type;
 };
 
 /*
  * specialization for const
  */
-template <class T>
-struct Iterator_Traits<const T> {
+template <class T, bool stl>
+struct Iterator_Traits<const T, stl> {
 	typedef T value_type;
 };
 
@@ -39,14 +44,15 @@ struct Iterator_Traits<const T> {
  * specialization for const pointer
  */
 template <class T>
-struct Iterator_Traits<const T*> {
+struct Iterator_Traits<const T*, false> {
 	typedef T value_type;
 };
 
-template <class T>
+template <class T, bool stl = false>
 class Iterator {
 public:
-	typedef typename Iterator_Traits<T>::value_type value_type;
+	typedef typename Iterator_Traits<T, stl>::value_type value_type;
+	typedef Iterator<T, stl> Self;
 
 public:
 	Iterator(T iterator) {
@@ -59,33 +65,33 @@ protected:
 	}
 
 public:
-	Iterator<T>& operator++() {
+	Self& operator++() {
 		++iterator;
 		return *this;
 	}
 
-	Iterator<T> operator++(int) {
-		Iterator<T> self = *this;
+	Self operator++(int) {
+		Self self = *this;
 		++iterator;
 		return self;
 	}
 
-	Iterator<T>& operator--() {
+	Self& operator--() {
 		--iterator;
 		return *this;
 	}
 
-	Iterator<T> operator--(int) {
-		Iterator<T> self = *this;
+	Self operator--(int) {
+		Self self = *this;
 		--iterator;
 		return self;
 	}
 	
-	const value_type operator*() {
-		return iterator;
+	value_type& operator*() {
+		return *iterator;
 	}
 	
-	value_type& operator->() {
+	T& operator->() {
 		return iterator;
 	}
 
@@ -93,12 +99,12 @@ public:
 		*iterator = value;
 	}
 	
-	bool operator==(const Iterator<T>& it) {
+	bool operator==(const Self& it) {
 		return iterator == it.iterator;
 	}
 
-	bool operator!=(const Iterator<T>& it) {
-		return !operator==(it);
+	bool operator!=(const Self& it) {
+		return !(*this == it);
 	}
 private:
 	T iterator;

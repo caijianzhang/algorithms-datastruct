@@ -42,10 +42,7 @@ public:
 	}
 
 	virtual ~Queue() {
-		if (buffer != 0) {
-			delete buffer;
-			buffer = 0;
-		}
+		clear();
 	}
 
 public:
@@ -101,6 +98,18 @@ public:
 		}
 
 		return *(queue + index);
+	}
+
+	void clear() {
+		if (buffer) {
+			delete []buffer;
+			buffer = 0;
+		}
+
+		queue = 0;
+		bufferSize = 0;
+		arrivalSize = 0;
+		size = 0;
 	}
 
 protected:

@@ -21,6 +21,7 @@ struct Node {
 	int shortest;
 };	
 
+// specialization PriorityComparer for Node 
 template <class Key, class Value>
 struct PriorityComparer<Node<Key, Value> > {
 	bool operator()(Node<Key, Value> n1, Node<Key, Value> n2) {
@@ -87,7 +88,7 @@ protected:
 		typename Graph<Key, Value>::value_type value = graph[node.vertex];
 		typename Graph<Key, Value>::value_type::iterator it = value.begin();
 		if (it == value.end()) {
-			// if this vertex's outdegree is 0, we save the shortest value to 'shortest'
+			// if this vertex's outdegree is 0, we save the shortest value in 'shortest'
 			shortest.erase(node.vertex);
 			shortest.insert(pair<type_vertex, int>(node.vertex, node.shortest));
 			return;

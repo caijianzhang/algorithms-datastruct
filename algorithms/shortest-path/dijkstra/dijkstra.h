@@ -16,19 +16,25 @@
 #include "../../../datastruct/queue/priority_queue/priority_queue.h"
 
 template <class Key, class Value>
+struct Node {
+	Vertex<Key, Value> vertex;
+	int shortest;
+};	
+
+template <class Key, class Value>
+struct PriorityComparer<Node<Key, Value> > {
+	bool operator()(Node<Key, Value> n1, Node<Key, Value> n2) {
+		return n1.shortest < n2.shortest;
+	}
+};
+
+template <class Key, class Value>
 class Dijkstra {
 public:
 	typedef Vertex<Key, Value> type_vertex;
 	typedef Edge<Key, Value> type_edge;
+	typedef Node<Key, Value> Node;
 
-	typedef struct _node {
-		type_vertex vertex;
-		int shortest;
-
-		bool operator<(const _node& node) {
-			return this->shortest < node.shortest;
-		}
-	} Node;
 public:
 	Dijkstra() {}
 	~Dijkstra() {}
@@ -133,7 +139,7 @@ protected:
 	}
 
 protected:
-	PriorityQueue<Node> vertexs;
+	PriorityQueue<Node, PriorityComparer<Node> > vertexs;
 	map<type_vertex, int> shortest;
 	map<type_vertex, type_vertex> path;
 	type_vertex source;

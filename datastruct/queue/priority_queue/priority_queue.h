@@ -13,7 +13,15 @@
 
 #include "../queue.h"
 
-template <class T>
+template <class T, class Extend = void>
+struct PriorityComparer {
+	// if t1's priority higher than t2, return true, others return false
+	bool operator()(T t1, T t2) {
+		return t1 > t2;
+	}
+};
+
+template <class T, class Comparer = PriorityComparer<T> >
 class PriorityQueue : public Queue<T> {
 public:
 	typedef typename Queue<T>::Iterator Iterator;
@@ -33,7 +41,7 @@ public:
 		typename Queue<T>::Iterator priority = this->begin();
 		typename Queue<T>::Iterator it = this->begin();
 		for (; it != this->end(); ++it) {
-			if (*priority < *it) {
+			if (!Comparer()(*priority, *it)) {
 				priority = it;
 			}
 		}

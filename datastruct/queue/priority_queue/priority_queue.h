@@ -15,7 +15,7 @@
 
 template <class T, class Extend = void>
 struct PriorityComparer {
-	// if t1's priority higher than t2, return true, others return false
+	// if t1's priority is higher than t2, return true, otherwise return false
 	bool operator()(T t1, T t2) {
 		return t1 > t2;
 	}
@@ -37,7 +37,7 @@ public:
 
 public:
 	virtual T pop() {
-		// find the most priority one
+		// find the highest priority one
 		typename Queue<T>::Iterator priority = this->begin();
 		typename Queue<T>::Iterator it = this->begin();
 		for (; it != this->end(); ++it) {
@@ -47,7 +47,7 @@ public:
 		}
 
 		if (priority != this->begin()) {
-			// swap
+			// swap the highest priority one whith the head one
 			T temp = *priority;
 			priority = *(this->begin());
 			this->begin() = temp;

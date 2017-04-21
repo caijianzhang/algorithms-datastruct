@@ -70,7 +70,7 @@ public:
 	}
 
 	/*
-	 * if the value with key exist
+	 * if the value with key exist, return true, otherwise return false
 	 */
 	bool exist(Key key, Value value) {
 		inner_iterator it = table.find(key);

@@ -22,6 +22,7 @@ public:
 		this->column = column;
 		this->size = row * column;
 		matrix = new T[row * column];
+		memset(matrix, 0, sizeof(T) * row * column);
 	}
 
 	~Matrix() {
@@ -39,7 +40,36 @@ public:
 	// return const pointer because the address of the metrix cann't be modified
 	// like this Metrix[x] = x will be obtain an error
 	T* const operator[](int r) {
+		if (r >= row) {
+			perror("out of bounds\n");
+			return 0;
+		}
+
 		return &matrix[r * column];
+	}
+
+	// set the every element to value]
+	void setAll(T value) {
+		for (int i = 0; i < row * column; i++) {
+			matrix[i] = value;
+		}
+	}
+
+	// clear the matrix 
+	void clear() {
+		memset(matrix, 0, sizeof(T) * row * column);
+	}
+
+	Matrix<T>& operator=(const Matrix<T>& m) {
+		if (this->row != m.row || this->column != m.column) {
+			perror("cann't copy");
+			return *this;
+		}
+
+		for (int i = 0; i < row * column; i ++) {
+			this->matrix[i] = m.matrix[i];
+		}
+		return *this;
 	}
 
 protected:

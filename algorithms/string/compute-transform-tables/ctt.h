@@ -179,7 +179,9 @@ public:
 		}
 	
 		int resultCost = cost[xLen-1][yLen-1];
+		free(cost[0]);
 		free(cost);
+		delete []op[0];
 		delete []op;
 		return resultCost;
 	}

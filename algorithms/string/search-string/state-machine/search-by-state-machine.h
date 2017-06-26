@@ -16,6 +16,11 @@
 using namespace std;
 
 class StateMachine {
+private:
+	// don't allow to copy
+	StateMachine(const StateMachine& machine) {
+	}
+
 public:
 	StateMachine() {
 		states = 0;
@@ -66,12 +71,20 @@ public:
 		}
 	}
 
-	int nextState(int state, char c) {
+	int nextState(int state, char c) const {
 		if (!characters) return 0;
 		return stateMachine[state][index(c)];
 	}
 
-	void print() {
+	int isFinalState(int state) const {
+		if (states - 1 == state) {
+			return 1;
+		}
+
+		return 0;
+	}
+
+	void print() const {
 		printf("  ");
 		for (int i = 0; i < chars; i ++) {
 			printf("%c ", characters[i]);
@@ -90,7 +103,7 @@ public:
 	}
 
 private:
-	int index(char c) {
+	int index(char c) const {
 		if (!characters) return 0;
 
 		for (int i = 0; i < chars; i++) {
@@ -133,8 +146,18 @@ private:
 
 class SearchString {
 public:
-	static int[] search(string str, StateMachine sm) {
-		
+	static void search(string str, const StateMachine& sm, int* result, int* size) {
+		*size = 0;
+		int state = 0;
+		for (int i = 0; i < str.size(); i ++) {
+			state = sm.nextState(state, str[i]);
+			printf("state of %c is %d\n", str[i], state);
+			if (sm.isFinalState(state)) {
+				result[*size] = i;
+				(*size) ++;
+				state = 0;
+			}
+		}
 	}
 };
 

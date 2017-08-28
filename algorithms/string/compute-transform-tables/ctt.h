@@ -32,8 +32,8 @@ public:
 	CTT(){}
 
 	/**
-	 * the mode is so slow....., because it will repeat calculation cost[x][y] meny times
-	 * we can stored cost[x][y] in an array, when each recursion we search cost[x][y] first, if we get it, returned immediately.
+	 * the mode is so slow....., because it will repeat calculation cost[x][y] many times
+	 * we can stored cost[x][y] in an array, each recursion we search cost[x][y] first, if we get it, returned immediately.
 	 *
 	 */
 	int getMinimumCost(string x, string y, vector<string>& operators) {

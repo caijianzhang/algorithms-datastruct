@@ -10,6 +10,7 @@
 
 #ifndef _GRAPH_VERTEX_H_
 #define _GRAPH_VERTEX_H_
+
 #include <iostream>
 #include <string>
 #include <vector>

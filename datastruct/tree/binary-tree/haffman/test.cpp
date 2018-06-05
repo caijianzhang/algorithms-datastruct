@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include "../node.h"
 #include "haffman.h"
 
 using namespace std;
@@ -20,26 +21,26 @@ Data operator+(Data d1, Data d2) {
 }
 
 ostream& operator<<(ostream& os, const Data data) {
-	os << "name:" << data.name << " weigth:" << data.weigth;
+	os << data.name;
 	return os;
 }
 
 template<>
-struct PriorityComparer<Data> {
-	bool operator()(Data t1, Data t2) {
-		return t1.weigth < t2.weigth;
+struct PriorityComparer< Node<Data>* > {
+	bool operator()(Node<Data>* n1, Node<Data>* n2) {
+		return n1->data.weigth < n2->data.weigth;
 	}
 };
 
 int main() {
-	PriorityQueue<Data> pq;
-	pq.push_back(Data("A", 0.1));
-	pq.push_back(Data("B", 0.2));
-	pq.push_back(Data("C", 0.3));
-	pq.push_back(Data("D", 0.4));
-
 	Haffman<Data> haffman;
-	haffman.build(pq);
+	haffman.addNode(Data("A", 45));
+	haffman.addNode(Data("B", 13));
+	haffman.addNode(Data("C", 12));
+	haffman.addNode(Data("D", 16));
+	haffman.addNode(Data("E", 9));
+	haffman.addNode(Data("F", 5));
+	haffman.build();
 	haffman.print();
 	return 0;
 }

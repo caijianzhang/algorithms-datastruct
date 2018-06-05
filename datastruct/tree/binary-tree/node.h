@@ -23,7 +23,7 @@ public:
 		this->data = data;
 		left = 0;
 		right = 0;
-		type = Type_Node;
+		type = Type_Leaf;
 	}
 
 	Node* left;

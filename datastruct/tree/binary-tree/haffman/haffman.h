@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include "../../../queue/priority_queue/priority_queue.h"
+#include "../../../queue/stack/stack.h"
 #include "../node.h"
 
 using namespace std;
@@ -27,9 +28,8 @@ public:
 	~Haffman() {
 		if (head) {
 			free(head);
+			head = 0;
 		}
-
-		head = 0;
 	}
 
 protected:
@@ -44,51 +44,58 @@ protected:
 	}
 
 public:
-	void build(PriorityQueue<T> queue) {
-		while (queue.getSize() > 0) {
-			T t = queue.pop();
+	void addNode(T node) {
+		queue.push_back(new Node<T>(node));
+	}
 
-			if (head == 0) {
-				head = new Node<T>(t);
-				continue;
+	void build() {
+		while (queue.getSize() > 0) {
+			Node<T>* n1 = queue.pop();
+			Node<T>* n2 = queue.pop();
+			if (n2 == 0) {
+				head = n1;
+				break;
 			}
 
-			Node<T>* left = new Node<T>(t);
-			left->type = Type_Leaf;
-
-			Node<T>* node = new Node<T>(left->data + head->data);
-			node->left = left;
-			node->right = head;
-			head = node;
+			Node<T>* node = new Node<T>(n1->data + n2->data);
+			node->type = Type_Node;
+			node->left = n1;
+			node->right = n2;
+			queue.push_back(node);
 		}
 	}
 
 	void print() {
-		cout << "head ";
-		print(head);
-	}
-
-	void print(Node<T>* node) {
-		if (node) {
-			cout << node->data << endl;
-			cout << endl;
-		}
-
-		if (node->left) {
-			cout << "left ";
-			print(node->left);
-			cout << endl;
-		}
-
-		if (node->right) {
-			cout << "right ";
-			print(node->right);
-			cout << endl;
-		}
+		Stack<int> path;
+		print(head, path);
 	}
 
 private:
+	void print(Node<T>* node, Stack<int>& path) {
+		if (node->left) {
+			path.push_back(0);
+			print(node->left, path);
+			path.pop();
+		}
+		
+		if (node->right) {
+			path.push_back(1);
+			print(node->right, path);
+			path.pop();
+		} 
+		
+		if (node->type == Type_Leaf) {
+			cout << node->data << " : ";
+			for (Queue<int>::Iterator it = path.begin(); it != path.end(); it++) {
+				cout << *it;
+			}
+
+			cout << endl;
+		}
+	}
+private:
 	Node<T>* head;
+	PriorityQueue< Node<T>* > queue;
 };
 
 #endif // _BINARY_TREE_HAFFMAN_H_

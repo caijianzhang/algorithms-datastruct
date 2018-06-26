@@ -1,14 +1,7 @@
 #include "priority_queue.h"
 
-template <> 
-struct PriorityComparer<int> {
-		bool operator()(int i1, int i2) {
-				return i1 < i2;
-		}
-};
-
 int main() {
-	PriorityQueue<int, PriorityComparer<int> > queue;
+	PriorityQueue<int, Comparer<int> > queue;
 	queue.push_back(123);
 	queue.push_back(456);
 

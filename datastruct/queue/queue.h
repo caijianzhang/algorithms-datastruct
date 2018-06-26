@@ -42,7 +42,7 @@ public:
 	}
 
 	virtual ~Queue() {
-		clear();
+		
 	}
 
 public:
@@ -100,7 +100,7 @@ public:
 		return *(queue + index);
 	}
 
-	void clear() {
+	virtual void destory() {
 		if (buffer) {
 			delete []buffer;
 			buffer = 0;
@@ -110,6 +110,10 @@ public:
 		bufferSize = 0;
 		arrivalSize = 0;
 		size = 0;
+	}
+
+	virtual bool empty() {
+		return size <= 0;
 	}
 
 protected:

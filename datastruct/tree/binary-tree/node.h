@@ -11,25 +11,27 @@
 #ifndef _BINARY_TREE_NODE_H_
 #define _BINARY_TREE_NODE_H_
 
-typedef enum {
-	Type_Node = 0,
-	Type_Leaf = 1
-} NodeType;
+namespace Tree {
+	typedef enum {
+		Type_Node = 0,
+		Type_Leaf = 1
+	} NodeType;
 
-template <class T>
-class Node {
-public:
-	Node(T data) {
-		this->data = data;
-		left = 0;
-		right = 0;
-		type = Type_Leaf;
-	}
+	template <class T>
+	class Node {
+	public:
+		Node(T data) {
+			this->data = data;
+			left = 0;
+			right = 0;
+			type = Type_Leaf;
+		}
 
-	Node* left;
-	Node* right;
-	NodeType type;
-	T data;
-};
+		Node* left;
+		Node* right;
+		NodeType type;
+		T data;
+	};
+} 
 
 #endif // _BINARY_TREE_NODE_H_

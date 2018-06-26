@@ -17,6 +17,7 @@
 #include "../node.h"
 
 using namespace std;
+using namespace Tree;
 
 template <class T>
 class Haffman {

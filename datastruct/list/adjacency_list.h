@@ -132,6 +132,10 @@ public:
 		return table.size();
 	}
 
+	virtual bool empty() {
+		return table.empty();
+	}
+
 protected:
 	map< Key, list<Value> > table;
 };

@@ -26,10 +26,7 @@ public:
 	}
 
 	~Matrix() {
-		if (matrix != 0) {
-			delete []matrix;
-			matrix = 0;
-		}
+		
 	}
 
 public:
@@ -60,6 +57,13 @@ public:
 		memset(matrix, 0, sizeof(T) * row * column);
 	}
 
+	virtual void destory() {
+		if (matrix != 0) {
+			delete []matrix;
+			matrix = 0;
+		}
+	}
+
 	Matrix<T>& operator=(const Matrix<T>& m) {
 		if (this->row != m.row || this->column != m.column) {
 			perror("cann't copy");
@@ -70,6 +74,10 @@ public:
 			this->matrix[i] = m.matrix[i];
 		}
 		return *this;
+	}
+
+	virtual bool empty() {
+		return row <= 0;
 	}
 
 protected:

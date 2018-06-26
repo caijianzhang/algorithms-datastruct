@@ -9,3 +9,6 @@ test
 
 # ignore tag file tags
 tags
+
+# ignore vscode
+.vscode

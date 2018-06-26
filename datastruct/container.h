@@ -24,10 +24,15 @@ public:
 	}
 
 	virtual ~Container() {
+		destory();
 	}
 
 public:
 	virtual const string getClassName() = 0;
+
+	virtual void destory() {}
+
+	virtual bool empty() = 0;
 	
 	/*
 	 * get the size of the objects

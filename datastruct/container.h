@@ -21,6 +21,7 @@ using namespace std;
 class Container {
 public:
 	Container() {
+		size = 0;
 	}
 
 	virtual ~Container() {
@@ -30,9 +31,17 @@ public:
 public:
 	virtual const string getClassName() = 0;
 
+	/**
+	 *  the inheritance class should impletement this mothod for release momory.
+	 */ 
 	virtual void destory() {}
 
-	virtual bool empty() = 0;
+	/** 
+	 * if you don't use #size in inheritance class, you should overrite this mothod. 
+	 */ 
+	virtual bool empty() {
+		return size <= 0;
+	}
 	
 	/*
 	 * get the size of the objects

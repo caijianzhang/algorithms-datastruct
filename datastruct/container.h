@@ -36,6 +36,11 @@ public:
 	 */ 
 	virtual void destory() {}
 
+	/**
+	 *  the inheritance class should impletement this mothod for clear the objects.
+	 */
+	virtual void clear() {}
+
 	/** 
 	 * if you don't use #size in inheritance class, you should overrite this mothod. 
 	 */ 

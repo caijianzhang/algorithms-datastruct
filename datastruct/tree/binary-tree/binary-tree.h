@@ -32,7 +32,7 @@ public:
 	}
 
 	~BinaryTree() {
-
+		leafs.clear();
 	}
 
 public: 
@@ -42,6 +42,13 @@ public:
 
 	virtual void destory() {
 		destory(root);
+		root = 0;
+	}
+
+	virtual void clear() {
+		destory();
+		size = 0;
+		height = 0;
 	}
 
 	virtual bool empty() {
@@ -136,7 +143,6 @@ private:
 	void print(Tree::Node<T>* node) {
 		if (!node) return;
 
-		
 		// print left children
 		print(node->left);
 		// print parent
@@ -148,7 +154,9 @@ private:
 	void destory(Tree::Node<T>* node) {
 		if (node) {
 			destory(node->left);
+			node->left = 0;
 			destory(node->right);
+			node->right = 0;
 			delete node;
 		}
 	}

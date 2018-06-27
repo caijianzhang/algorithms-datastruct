@@ -105,7 +105,9 @@ public:
 			delete []buffer;
 			buffer = 0;
 		}
+	}
 
+	virtual void clear() {
 		queue = 0;
 		bufferSize = 0;
 		arrivalSize = 0;

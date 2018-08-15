@@ -19,10 +19,7 @@
 #include "node.h"
 
 using namespace std;
-
-/**
- * This is a complete binary tree, when add a node to the tree, it will be appended at the lastest.
- */ 
+ 
 template <class T>
 class BinaryTree : public Container {
 public: 
@@ -31,8 +28,8 @@ public:
 		height = 0;
 	}
 
-	~BinaryTree() {
-		leafs.clear();
+	virtual ~BinaryTree() {
+		destory();
 	}
 
 public: 
@@ -59,52 +56,23 @@ public:
 		// do nothing
 	}
 
-	/**
-	 * we put leaf nodes into a queue, when building a complete tree, we fetch the first node of the queue, 
-	 * and append the newest node to the node, if the node has both left and right children, we remove from 
-	 * it from the queue.
-	 * imaging a tree like this:
-	 *               1(root)
-	 *              / 
-	 *             2   
-	 * now the queue is 1, 2.
-	 * when we add a node name 3, we fetch the first node in queue, is node 1, and append the node 3 to node 1's right child,
-	 * then put the node 3 into the queue, and remove node 1. now the tree like this:
-	 *               1(root)
-	 *              /  \ 
-	 *             2    3
-	 * and the queue is 2, 3.
-	 * 
-	 */ 
+	virtual void addNode(Tree::Node<T>* node) {
+		
+	}
+
 	void add(T data) {
 		Tree::Node<T>* node = new Tree::Node<T>(data);
 		size++;
 
 		if (root == 0) {
 			root = node;
-			leafs.push_back(root);
-			height = 1;
-			return;
-		}
-
-		// get the first node
-		Tree::Node<T>* lasted = leafs[0];
-		if (!lasted->left) {
-			lasted->left = node;
 		} else {
-			lasted->right = node;
-			// if the fisrt node has both left and right children, we remove it.
-			leafs.pop();
+			addNode(node);
 		}
-
-		// put the newest node into the last
-		leafs.push_back(node);
-		
 		// adjust the tree, in this case, we do nothing.
 		adjust();
-
 		// caclute the height
-		cacluteHeight();
+		calcuteHeight();
 	}
 
 	T pop() {
@@ -133,12 +101,17 @@ public:
 	}
 
 private: 
-	void cacluteHeight() {
-		while ((1 << height) < size) {
-			height ++;
-		}
+	void calcuteHeight() {
+		height = calcuteHeight(root);
 	}
 
+	int calcuteHeight(Tree::Node<T>* node) {
+		if (!node) return 0;
+
+		int left = calcuteHeight(node->left);
+		int right = calcuteHeight(node->right);
+		return left > right ? (left + 1) : (right + 1);
+	}
 
 	void print(Tree::Node<T>* node) {
 		if (!node) return;
@@ -166,8 +139,6 @@ protected:
 	Tree::Node<T>* root;
 	// the height of the tree
 	int height;
-	// store the leaf node
-	Queue< Tree::Node<T>* > leafs;
 };
 
 #endif // _BINARY_TREE_BINARY_TREE_H_

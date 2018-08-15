@@ -93,7 +93,7 @@ public:
 
 	virtual T operator[](int index) {
 		if (index >= this->size) {
-			printf("out of bounds\n");
+			// out of bounds
 			return Empty<T>()();
 		}
 

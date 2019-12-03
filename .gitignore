@@ -12,3 +12,4 @@ tags
 
 # ignore vscode
 .vscode
+.DS_Store
